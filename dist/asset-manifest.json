@@ -1,12 +1,12 @@
 {
   "files": {
     "main.css": "/static/css/main.f966ff0b.chunk.css",
-    "main.js": "WearYourMask/static/js/main.5defa665.chunk.js",
-    "main.js.map": "WearYourMask/static/js/main.5defa665.chunk.js.map",
-    "runtime-main.js": "WearYourMask/static/js/runtime-main.56198920.js",
-    "runtime-main.js.map": "WearYourMask/static/js/runtime-main.56198920.js.map",
-    "static/js/2.d9acd70a.chunk.js": "WearYourMask/static/js/2.d9acd70a.chunk.js",
-    "static/js/2.d9acd70a.chunk.js.map": "WearYourMask/static/js/2.d9acd70a.chunk.js.map",
+    "main.js": "/static/js/main.5defa665.chunk.js",
+    "main.js.map": "/static/js/main.5defa665.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.56198920.js",
+    "runtime-main.js.map": "/static/js/runtime-main.56198920.js.map",
+    "static/js/2.d9acd70a.chunk.js": "/static/js/2.d9acd70a.chunk.js",
+    "static/js/2.d9acd70a.chunk.js.map": "/static/js/2.d9acd70a.chunk.js.map",
     "index.html": "/index.html",
     "precache-manifest.7138e10d50e27dd80ad91ea83a81f050.js": "/precache-manifest.7138e10d50e27dd80ad91ea83a81f050.js",
     "service-worker.js": "/service-worker.js",
@@ -14,9 +14,9 @@
     "static/js/2.d9acd70a.chunk.js.LICENSE.txt": "/static/js/2.d9acd70a.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "WearYourMask/static/js/runtime-main.56198920.js",
-    "WearYourMask/static/js/2.d9acd70a.chunk.js",
-    "WearYourMask/static/css/main.f966ff0b.chunk.css",
-    "WearYourMask/static/js/main.5defa665.chunk.js"
+    "static/js/runtime-main.56198920.js",
+    "static/js/2.d9acd70a.chunk.js",
+    "static/css/main.f966ff0b.chunk.css",
+    "static/js/main.5defa665.chunk.js"
   ]
 }
