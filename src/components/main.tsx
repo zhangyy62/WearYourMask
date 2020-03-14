@@ -34,12 +34,12 @@ class Main extends React.Component {
     addMask(points: Point[]) {
         const canvas = this.refs.refImgOverlay as any;
         const inputImgEl = this.refs.refImg as HTMLImageElement;
-        console.log(points[3].x, points[9].y, points[15].x - points[3].x, points[29].y - points[9].y);
+        console.log(points[2].x, points[8].y, points[14].x - points[2].x, points[28].y - points[8].y);
         if (canvas) {
             let ctx = canvas.getContext('2d');
             canvas.width = inputImgEl.width;
             canvas.height = inputImgEl.height;
-            ctx.drawImage(this.state.image, points[3].x, points[29].y, points[15].x - points[3].x, points[9].y - points[29].y);
+            ctx.drawImage(this.state.image, points[2].x, points[28].y, points[14].x - points[2].x, points[8].y - points[28].y);
         }
     }
 
@@ -52,6 +52,7 @@ class Main extends React.Component {
             .withFaceDescriptors()
 
 
+            debugger
         if (!fullFaceDescriptions.length) {
             return
         }
