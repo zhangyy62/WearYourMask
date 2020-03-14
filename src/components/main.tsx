@@ -1,5 +1,4 @@
 import React from "react";
-import ReactDOM from 'react-dom';
 import './main.css';
 import * as faceapi from 'face-api.js';
 import { FaceMatcher, Point } from "face-api.js";
@@ -9,7 +8,9 @@ class Main extends React.Component {
     public state = {
         imgSrc: '',
         fileInput: Element,
-        image: new Image()
+        image: new Image(),
+        isLoading: true,
+        showMask: false
     }
 
     faceMatcher: FaceMatcher | undefined;
@@ -21,6 +22,7 @@ class Main extends React.Component {
     }
 
     async uploadRefImage(e: any) {
+        this.setState({ showMask: false });
         const imgFile = e.target.files[0];
         const img = await faceapi.bufferToImage(imgFile);
         this.setState({
@@ -30,31 +32,19 @@ class Main extends React.Component {
     }
 
     addMask(points: Point[]) {
-        let masArray = [];
         const canvas = this.refs.refImgOverlay as any;
         const inputImgEl = this.refs.refImg as HTMLImageElement;
-
-        masArray.push(points[3]);
-        masArray.push(points[9]);
-        masArray.push(points[15]);
-        masArray.push(points[29]);
         console.log(points[3].x, points[9].y, points[15].x - points[3].x, points[29].y - points[9].y);
         if (canvas) {
             let ctx = canvas.getContext('2d');
             canvas.width = inputImgEl.width;
             canvas.height = inputImgEl.height;
-            // ctx.rect(points[3].x, points[9].y, points[15].x - points[3].x, points[29].y - points[9].y);
-            // ctx.rect(0, 0, inputImgEl.width, inputImgEl.height);
             ctx.drawImage(this.state.image, points[3].x, points[29].y, points[15].x - points[3].x, points[9].y - points[29].y);
-            // ctx.translate(points[3].x, points[9].y);
-            // ctx.fillRect(0, 0, points[15].x - points[3].x, points[9].y - points[29].y);
         }
     }
 
     async updateReferenceImageResults() {
         const inputImgEl = this.refs.refImg;
-        const canvas = this.refs.refImgOverlay;
-
 
         const fullFaceDescriptions = await faceapi
             .detectAllFaces(inputImgEl as faceapi.TNetInput)
@@ -69,34 +59,28 @@ class Main extends React.Component {
         fullFaceDescriptions.forEach(x => {
             this.addMask(x.landmarks.positions);
         })
-        // this.faceMatcher = new faceapi.FaceMatcher(fullFaceDescriptions)
-
-        // faceapi.matchDimensions(canvas as unknown as faceapi.IDimensions, inputImgEl as unknown as faceapi.IDimensions)
-        // const resizedResults = faceapi.resizeResults(fullFaceDescriptions, inputImgEl as unknown as faceapi.IDimensions)
-
-        // resizedResults.forEach(({ detection, descriptor }) => {
-        //     if (this.faceMatcher !== undefined) {
-        //         const label = this.faceMatcher.findBestMatch(descriptor).toString()
-        //         const options = { label }
-        //         const drawBox = new faceapi.draw.DrawBox(detection.box, options)
-        //         drawBox.draw(canvas as HTMLCanvasElement)
-        //     }
-        // });
+        this.setState({ showMask: true });
     }
 
     async componentDidMount() {
         await faceapi.nets.ssdMobilenetv1.loadFromUri('/models');
         await faceapi.nets.faceLandmark68Net.loadFromUri('/models');
         await faceapi.nets.faceRecognitionNet.loadFromUri('/models');
+        this.setState({ isLoading: false });
     }
 
     render() {
         return (
             <div>
+                {this.state.isLoading &&
+                    <div className="loading">
+                        <p>正在加载</p>
+                    </div>
+                }
                 <header>wear mask</header>
                 <h1>请选择人像图片上传，上传后有点卡，稍等</h1>
                 <div className="panel" >
-                    <div className="panel-c " >
+                    <div className="panel-c" >
                         <img ref="refImg" src={this.state.imgSrc} />
                         <canvas ref="refImgOverlay" className="overlay" />
                     </div>
