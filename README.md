@@ -3,3 +3,4 @@
 地址：https://sparkxxxxxx.github.io/WearYourMask/index.html
 
 ## demo 
+![demo](https://github.com/sparkxxxxxx/WEARYOURMASK/blob/master/assets/mask.gif)  
