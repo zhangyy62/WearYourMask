@@ -39,9 +39,12 @@ const fullFaceDescriptions = await faceapi
 ```
 
 68个特征点如下，我们选用3，9，15，29四个点
+![dem2](https://github.com/sparkxxxxxx/WEARYOURMASK/blob/master/assets/68.jpg)  
+![demo3](https://github.com/sparkxxxxxx/WEARYOURMASK/blob/master/assets/face.jpg)  
 
 - 选用后就该画口罩了
 口罩用canvas画，canvas则需要放到人嘴鼻处，此处用到了上面68个特征点都数据。
+![demo4](https://github.com/sparkxxxxxx/WEARYOURMASK/blob/master/assets/console.jpg)  
 
 fullFaceDescriptions[0].landmarks.positions
 positions 是一个68个元素的数组，对应上面的特征值编号。最后用3, 9 , 15, 29的点来计算canvas 应该移动的位置就好了。
